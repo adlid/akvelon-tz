@@ -25,6 +25,10 @@ function ColorItem(props: Props) {
 		}
 		console.log(colorItem);
 	}, [data, id]);
+
+	if (isLoading) {
+		return <div>Loading</div>;
+	}
 	return (
 		<Card sx={{ maxWidth: 345 }}>
 			<CardActionArea>

@@ -66,6 +66,22 @@ function SideBar(props: Props) {
 			</Toolbar>
 			<Divider />
 			<List aria-labelledby="nested-list-subheader">
+				<Link
+					style={{
+						color: "#212121",
+						textDecoration: "none",
+					}}
+					to={"/users"}
+				>
+					<ListItem
+						onClick={() => dispatch(handleDrawerToggle(isMobileOpen))}
+						disablePadding
+					>
+						<ListItemButton>
+							<ListItemText primary="Users" />
+						</ListItemButton>
+					</ListItem>
+				</Link>
 				<ListItemButton onClick={handleClick}>
 					<ListItemText primary="Colors" />
 					{open ? <ExpandLess /> : <ExpandMore />}
@@ -95,6 +111,22 @@ function SideBar(props: Props) {
 						})}
 					</List>
 				</Collapse>
+				<Link
+					style={{
+						color: "#212121",
+						textDecoration: "none",
+					}}
+					to={"/notFound"}
+				>
+					<ListItem
+						onClick={() => dispatch(handleDrawerToggle(isMobileOpen))}
+						disablePadding
+					>
+						<ListItemButton>
+							<ListItemText primary="Not found" />
+						</ListItemButton>
+					</ListItem>
+				</Link>
 			</List>
 		</div>
 	);

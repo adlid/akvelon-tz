@@ -7,6 +7,7 @@ import Home from "../Pages/Home/Home";
 import { MenuListApi } from "../services/MenuListService";
 import { IUnknown } from "../models/IUnknown";
 import ColorItem from "../components/ColorItem/ColorItem";
+import UserList from "../Pages/UserList/UserList";
 
 export const RoutesComponent: React.FC = () => {
 	const [menuList, setMenuList] = useState<IUnknown[]>();
@@ -19,11 +20,15 @@ export const RoutesComponent: React.FC = () => {
 		console.log(menuList);
 	}, [data]);
 
+	if (isLoading) {
+		return <div>Loading</div>;
+	}
 	return (
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<MainLayout />}>
 					<Route index element={<Home />} />
+					<Route path="/users" element={<UserList />} />
 					{menuList?.map((item) => {
 						return (
 							<Route

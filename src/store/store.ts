@@ -1,16 +1,21 @@
 import {combineReducers, configureStore, getDefaultMiddleware} from "@reduxjs/toolkit"
 import LayoutReducer from './reducers/LayoutSlice'
 import { MenuListApi } from "../services/MenuListService"
+import { UsersApi } from "../services/UserListService"
 const rootReducer = combineReducers({
     LayoutReducer,
-     [MenuListApi.reducerPath] : MenuListApi.reducer
+     [MenuListApi.reducerPath] : MenuListApi.reducer,
+     [UsersApi.reducerPath] : UsersApi.reducer
 })
 
 
 export const setupStore = () => {
     return configureStore({
         reducer: rootReducer,
-        middleware:(getDefaultMiddleware) => getDefaultMiddleware().concat(MenuListApi.middleware)
+        middleware:(getDefaultMiddleware) => getDefaultMiddleware()
+        .concat(MenuListApi.middleware)
+        .concat(UsersApi.middleware),
+        
     })
 }
 
