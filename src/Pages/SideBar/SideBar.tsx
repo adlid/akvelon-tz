@@ -71,6 +71,22 @@ function SideBar(props: Props) {
 						color: "#212121",
 						textDecoration: "none",
 					}}
+					to={"/"}
+				>
+					<ListItem
+						onClick={() => dispatch(handleDrawerToggle(isMobileOpen))}
+						disablePadding
+					>
+						<ListItemButton>
+							<ListItemText primary="Home" />
+						</ListItemButton>
+					</ListItem>
+				</Link>
+				<Link
+					style={{
+						color: "#212121",
+						textDecoration: "none",
+					}}
 					to={"/users"}
 				>
 					<ListItem

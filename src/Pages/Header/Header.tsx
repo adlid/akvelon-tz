@@ -17,6 +17,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { removeUser } from "../../store/reducers/UserSlice";
+import useAuth from "../../hooks/use-auth";
 interface HeaderProps {
 	drawerWidth: number;
 }
@@ -24,7 +25,7 @@ interface HeaderProps {
 const settings = ["Profile", "Logout"];
 export const Header: React.FC<HeaderProps> = ({ drawerWidth }) => {
 	const dispatch = useAppDispatch();
-
+	const { email } = useAuth();
 	const { handleDrawerToggle } = layoutSlice.actions;
 	const { isMobileOpen } = useAppSelector((state) => state.LayoutReducer);
 	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -34,12 +35,9 @@ export const Header: React.FC<HeaderProps> = ({ drawerWidth }) => {
 		null
 	);
 
-	
 	const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorElUser(event.currentTarget);
 	};
-
-
 
 	const handleCloseUserMenu = () => {
 		setAnchorElUser(null);
@@ -64,7 +62,11 @@ export const Header: React.FC<HeaderProps> = ({ drawerWidth }) => {
 						<MenuIcon />
 					</IconButton>
 					<Box sx={{ flexGrow: 1 }} />
-					<Box sx={{ display: { md: "flex" } }}>
+					<Box
+						style={{ display: "flex", alignItems: "center" }}
+						sx={{ display: { md: "flex" } }}
+					>
+						{email}
 						<Tooltip title="Open settings">
 							<IconButton
 								size="large"
@@ -77,6 +79,7 @@ export const Header: React.FC<HeaderProps> = ({ drawerWidth }) => {
 								<AccountCircle />
 							</IconButton>
 						</Tooltip>
+
 						<Menu
 							sx={{ mt: "45px" }}
 							id="menu-appbar"
@@ -98,8 +101,9 @@ export const Header: React.FC<HeaderProps> = ({ drawerWidth }) => {
 							</MenuItem>
 							<MenuItem
 								onClick={() => {
+									
 									handleCloseUserMenu();
-									dispatch(removeUser())
+									dispatch(removeUser());
 								}}
 							>
 								<Typography textAlign="center">Logout</Typography>

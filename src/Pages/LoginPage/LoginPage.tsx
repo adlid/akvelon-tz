@@ -12,15 +12,21 @@ function LoginPage() {
 
 	const handleLogin = (email: string, password: string) => {
 		const auth = getAuth();
-		signInWithEmailAndPassword(auth, email, password).then(({ user }) => {
-			dispatch(
-				setUser({
-					token: user.refreshToken!,
-					email: user.email!,
-				})
-			);
-			navigate("/");
-		});
+		signInWithEmailAndPassword(auth, email, password)
+			.then(({ user }) => {
+				dispatch(
+					setUser({
+						token: user.refreshToken!,
+						email: user.email!,
+					})
+				);
+				localStorage.setItem('email', user.email!)
+				navigate("/");
+			})
+			.catch((e) => {
+				
+				alert("Что-то пошло не так");
+			});
 	};
 
 	return (

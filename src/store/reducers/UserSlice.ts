@@ -20,8 +20,12 @@ const loginSlice = createSlice({
         removeUser(state){
             state.email = ''
             state.token = ''
-        }
+            localStorage.removeItem('email')
+        },
+        checkAuth(state,action:PayloadAction<ILogin>){
+            state.email! = action.payload.email!
+        },
     }
 })
-export const {setUser, removeUser} = loginSlice.actions
+export const {setUser, removeUser, checkAuth} = loginSlice.actions
 export default loginSlice.reducer
