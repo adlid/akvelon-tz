@@ -7,13 +7,15 @@ import {
 	TableRow,
 	TableCell,
 	TableBody,
+	Avatar,
 } from "@mui/material";
 import React from "react";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Link } from "react-router-dom";
 import { IUsers } from "../../models/IUsers";
 import { UsersApi } from "../../services/UserListService";
-
+import "./UserList.scss";
 interface Column {
 	id: "avatar" | "first_name" | "last_name" | "email";
 	label: string;
@@ -26,7 +28,7 @@ const columns: readonly Column[] = [
 	{
 		id: "avatar",
 		label: "avatar",
-		minWidth: 170,
+		minWidth: 30,
 	},
 	{
 		id: "first_name",
@@ -74,12 +76,7 @@ function UserList() {
 		if (data?.data) {
 			setuserList([...userList, ...data?.data]);
 		}
-		console.log(data);
 	}, [data]);
-
-	useEffect(() => {
-		console.log(userList);
-	}, [userList]);
 
 	return (
 		<div>
@@ -119,7 +116,15 @@ function UserList() {
 														console.log(value);
 														return (
 															<TableCell key={column.id} align={column.align}>
-																{value}
+																{column.id === "avatar" ? (
+																	<Avatar alt="avatar" src={value} />
+																) : column.id === "first_name" ? (
+																	<Link className="link-hover" to={`${row.id}`}>
+																		{value}
+																	</Link>
+																) : (
+																	value
+																)}
 															</TableCell>
 														);
 													})}

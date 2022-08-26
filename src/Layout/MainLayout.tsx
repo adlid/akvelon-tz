@@ -1,9 +1,9 @@
 import { Box, CssBaseline, Toolbar } from "@mui/material";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { Header } from "../Pages/Header/Header";
 import SideBar from "../Pages/SideBar/SideBar";
 import { RoutesComponent } from "../Routes";
-
+import useAuth from '../hooks/use-auth'
 interface MainLayoutProps {
 	children?: any;
 	className?: string;
@@ -14,8 +14,10 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
 	className,
 }) => {
 	const drawerWidth = 240;
-
-	return (
+ 
+	const {isAuth, email} = useAuth()
+	
+	return isAuth ? (
 		<>
 			<Box sx={{ display: "flex" }}>
 			<CssBaseline />
@@ -39,6 +41,6 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
 				<Outlet/> 
 			</Box>
 		</Box>
-		</>
-	);
+		</> 
+	): <Navigate to='sign-in'/>;
 };

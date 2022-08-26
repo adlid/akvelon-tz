@@ -5,6 +5,9 @@ import {
 	IconButton,
 	Toolbar,
 	Typography,
+	Menu,
+	Tooltip,
+	MenuItem,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import React from "react";
@@ -13,17 +16,34 @@ import { layoutSlice } from "../../store/reducers/LayoutSlice";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-
+import { removeUser } from "../../store/reducers/UserSlice";
 interface HeaderProps {
 	drawerWidth: number;
 }
 
+const settings = ["Profile", "Logout"];
 export const Header: React.FC<HeaderProps> = ({ drawerWidth }) => {
 	const dispatch = useAppDispatch();
 
 	const { handleDrawerToggle } = layoutSlice.actions;
 	const { isMobileOpen } = useAppSelector((state) => state.LayoutReducer);
+	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+		null
+	);
+	const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+		null
+	);
 
+	
+	const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+		setAnchorElUser(event.currentTarget);
+	};
+
+
+
+	const handleCloseUserMenu = () => {
+		setAnchorElUser(null);
+	};
 	return (
 		<div>
 			<AppBar
@@ -45,15 +65,46 @@ export const Header: React.FC<HeaderProps> = ({ drawerWidth }) => {
 					</IconButton>
 					<Box sx={{ flexGrow: 1 }} />
 					<Box sx={{ display: { md: "flex" } }}>
-						<IconButton
-							size="large"
-							edge="end"
-							aria-label="account of current user"
-							aria-haspopup="true"
-							color="inherit"
+						<Tooltip title="Open settings">
+							<IconButton
+								size="large"
+								edge="end"
+								aria-label="account of current user"
+								aria-haspopup="true"
+								color="inherit"
+								onClick={handleOpenUserMenu}
+							>
+								<AccountCircle />
+							</IconButton>
+						</Tooltip>
+						<Menu
+							sx={{ mt: "45px" }}
+							id="menu-appbar"
+							anchorEl={anchorElUser}
+							anchorOrigin={{
+								vertical: "top",
+								horizontal: "right",
+							}}
+							keepMounted
+							transformOrigin={{
+								vertical: "top",
+								horizontal: "right",
+							}}
+							open={Boolean(anchorElUser)}
+							onClose={handleCloseUserMenu}
 						>
-							<AccountCircle />
-						</IconButton>
+							<MenuItem onClick={handleCloseUserMenu}>
+								<Typography textAlign="center">Profile</Typography>
+							</MenuItem>
+							<MenuItem
+								onClick={() => {
+									handleCloseUserMenu();
+									dispatch(removeUser())
+								}}
+							>
+								<Typography textAlign="center">Logout</Typography>
+							</MenuItem>
+						</Menu>
 					</Box>
 				</Toolbar>
 			</AppBar>

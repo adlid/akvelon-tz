@@ -2,8 +2,10 @@ import {combineReducers, configureStore, getDefaultMiddleware} from "@reduxjs/to
 import LayoutReducer from './reducers/LayoutSlice'
 import { MenuListApi } from "../services/MenuListService"
 import { UsersApi } from "../services/UserListService"
+import LoginReducer from './reducers/UserSlice'
 const rootReducer = combineReducers({
     LayoutReducer,
+    LoginReducer,
      [MenuListApi.reducerPath] : MenuListApi.reducer,
      [UsersApi.reducerPath] : UsersApi.reducer
 })

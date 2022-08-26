@@ -13,6 +13,11 @@ const URL = 'https://reqres.in/api/'
              query: (pageNum) => ({
                 url : `users?page=${pageNum}`
              })
-        })
+        }),
+        fetchUser: build.query<ResponceResult<IUsers>, any>({
+         query: (id) => ({
+            url : `users/${id}`
+         })
+    }),
     })
  })
