@@ -23,7 +23,6 @@ function ColorItem(props: Props) {
 		if (!isLoading) {
 			setColorItem(data?.data);
 		}
-		console.log(colorItem);
 	}, [data, id]);
 
 	if (isLoading) {

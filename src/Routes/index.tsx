@@ -19,8 +19,6 @@ export const RoutesComponent: React.FC = () => {
 
 	useEffect(() => {
 		setMenuList(data?.data);
-		console.log(data?.data[1].name.split(" ").join(""));
-		console.log(menuList);
 	}, [data]);
 
 	if (isLoading) {

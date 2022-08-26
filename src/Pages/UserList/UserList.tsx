@@ -62,8 +62,6 @@ function UserList() {
 	const handleChangeRowsPerPage = (
 		event: React.ChangeEvent<HTMLInputElement>
 	) => {
-		console.log(event.target.value);
-
 		setRowsPerPage(+event.target.value);
 		setPage(1);
 		setPageNum(1);
@@ -111,9 +109,7 @@ function UserList() {
 													key={row.id}
 												>
 													{columns.map((column) => {
-														debugger;
 														const value = row![column?.id!]!;
-														console.log(value);
 														return (
 															<TableCell key={column.id} align={column.align}>
 																{column.id === "avatar" ? (
@@ -135,7 +131,6 @@ function UserList() {
 						</Table>
 					</TableContainer>
 					<TablePagination
-						rowsPerPageOptions={[10, 25, 100]}
 						component="div"
 						count={data?.total!}
 						rowsPerPage={rowsPerPage}

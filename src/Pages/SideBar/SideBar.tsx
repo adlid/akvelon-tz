@@ -43,15 +43,13 @@ function SideBar(props: Props) {
 
 	const container =
 		window !== undefined ? () => window().document.body : undefined;
-	const [open, setOpen] = React.useState(true);
+	const [open, setOpen] = React.useState(false);
 
 	const handleClick = () => {
 		setOpen(!open);
 	};
 	useEffect(() => {
 		setMenuList(data?.data);
-		console.log(menuList);
-		console.log(data);
 	}, [data]);
 
 	const drawer = (
@@ -127,22 +125,6 @@ function SideBar(props: Props) {
 						})}
 					</List>
 				</Collapse>
-				<Link
-					style={{
-						color: "#212121",
-						textDecoration: "none",
-					}}
-					to={"/notFound"}
-				>
-					<ListItem
-						onClick={() => dispatch(handleDrawerToggle(isMobileOpen))}
-						disablePadding
-					>
-						<ListItemButton>
-							<ListItemText primary="Not found" />
-						</ListItemButton>
-					</ListItem>
-				</Link>
 			</List>
 		</div>
 	);
