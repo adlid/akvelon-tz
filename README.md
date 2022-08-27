@@ -6,6 +6,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `npm install`
+Для того чтобы загрузить все необходимые пакеты
+
 ### `yarn start`
 
 Runs the app in the development mode.\
@@ -16,10 +19,9 @@ You will also see any lint errors in the console.
 
 ### `Библиотеки`
 
-Redux, redux-toolkit, rtk-query, scss, dayjs, typeScript, react-dom, react-router-dom, mui/material
+Redux, redux-toolkit, rtk-query, scss, typeScript, react-dom, react-router-dom v6, mui/material last version, 
 
 +Адаптика для мобильки
 
-Использовал для для одного запроса crm.status.list redux-toolkit, для запроса crm.deal.list использовал rtk-query так как не было ендпоинтов для отдельного меню айтема, если обычно использвать гет запрос то при каждом клике на меню айтем срабатывало бы запрос, с помощью rtk-query кэшировал данных.
-
-crm.productrow.list метод не работало сделал то что доступно по ресту
+Использовал rtk-query для запросов менюшки, так как при повторном клике определенного меню-айтема не надо загрузить занова данных.
+Авторизация через FireBase
