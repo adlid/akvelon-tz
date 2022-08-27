@@ -10,12 +10,9 @@ import {
 	Collapse,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
 import { layoutSlice } from "../../store/reducers/LayoutSlice";
 import { Link } from "react-router-dom";
-import { fetchStatusList } from "../../store/reducers/ActionCreators";
 import "./SideBar.scss";
 import { MenuListApi } from "../../services/MenuListService";
 import { IUnknown } from "../../models/IUnknown";

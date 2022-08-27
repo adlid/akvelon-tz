@@ -67,8 +67,7 @@ function UserList() {
 		setPageNum(1);
 	};
 
-	const { error, isFetching, data } =
-		UsersApi.useFetchAllUserListQuery(pageNum);
+	const { error, isLoading, data } = UsersApi.useFetchAllUserListQuery(pageNum);
 
 	useEffect(() => {
 		if (data?.data) {
@@ -78,7 +77,7 @@ function UserList() {
 
 	return (
 		<div>
-			{isFetching && <div>Loading</div>}
+			{isLoading && <div>Loading</div>}
 			{userList ? (
 				<Paper sx={{ width: "100%", overflow: "hidden" }}>
 					<TableContainer sx={{ maxHeight: 440 }}>
@@ -131,6 +130,7 @@ function UserList() {
 						</Table>
 					</TableContainer>
 					<TablePagination
+						rowsPerPageOptions={[10, 25, 100]}
 						component="div"
 						count={data?.total!}
 						rowsPerPage={rowsPerPage}
